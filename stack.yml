@@ -3,7 +3,7 @@ services:
  elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.0
     deploy:
-      replicas: 3
+      replicas: 5
       endpoint_mode: dnsrr
       update_config:
         parallelism: 1
@@ -13,7 +13,7 @@ services:
       - "network.publish_host=_eth0_"
       - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
       - "discovery.zen.ping.unicast.hosts=elasticsearch"
-      - "discovery.zen.minimum_master_nodes=2"
+      - "discovery.zen.minimum_master_nodes=3"
     networks:
       - elasticsearch
 networks:
