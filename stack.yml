@@ -16,6 +16,9 @@ services:
       - "discovery.zen.minimum_master_nodes=3"
     networks:
       - elasticsearch
+    ports:
+      - 9200:9200
+      - 9300:9300
 networks:
   elasticsearch:
     driver: overlay
