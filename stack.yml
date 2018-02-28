@@ -9,8 +9,9 @@ services:
         parallelism: 1
         delay: 10m
     environment:
-      - network.host=_eth0_
-      - network.publish_host=_eth0_
+      - "network.host=_eth0_"
+      - "network.publish_host=_eth0_"
+      - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
       - "discovery.zen.ping.unicast.hosts=elasticsearch"
       - "discovery.zen.minimum_master_nodes=2"
     networks:
