@@ -21,7 +21,7 @@ services:
           - node.labels.type == elastic
     volumes:
      - data:/usr/share/elasticsearch/data
-     - /data/Elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
+     - ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
 
   kibana:
     image: docker.elastic.co/kibana/kibana:6.2.2
