@@ -1,0 +1,26 @@
+version: "3.4"
+services: 
+ elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.0.0
+    deploy:
+      replicas: 5
+      endpoint_mode: dnsrr
+      update_config:
+        parallelism: 1
+        delay: 10m
+    environment:
+      - network.host=_eth0_
+      - network.publish_host=_eth0_
+      - "discovery.zen.ping.unicast.hosts=elasticsearch"
+      - "discovery.zen.minimum_master_nodes=3"
+    volumes:
+      - data-elastic:/usr/share/elasticsearch/data
+    networks:
+      - elasticsearch
+volumes:
+  data-elastic:
+    name: '{{.Service.Name}}-{{.Task.Slot}}'
+    driver: whatever
+networks:
+  elasticsearch:
+    driver: overlay
