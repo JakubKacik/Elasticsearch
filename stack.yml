@@ -1,7 +1,7 @@
 version: "3.4"
 
 services: 
- elasticsearch:
+  elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.0
     deploy:
       replicas: 5
@@ -15,7 +15,7 @@ services:
       - "network.publish_host=_eth0_"
       - "discovery.zen.ping.unicast.hosts=tasks.elasticsearch"
     networks:
-      - elasticsearch
+      - esnet
     ports:
       - 9200:9200
       - 9300:9300
@@ -27,7 +27,7 @@ services:
     ports:
       - 5601:5601
     networks:
-      - elasticsearch
+      - esnet
     depends_on:
       - elasticsearch
     deploy:
@@ -38,7 +38,7 @@ services:
           - node.role == manager
 
 networks:
-  elasticsearch:
+  esnet:
     driver: overlay
 
 volumes:
