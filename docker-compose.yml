@@ -15,11 +15,10 @@ services:
       - 9200:9200
       - 9300:9300
     deploy:
-      replicas: 5
-      #mode: global
-      #placement:
-        #constraints:
-          #- node.labels.type == elastic
+      mode: global
+      placement:
+        constraints:
+          - node.labels.type == elastic
     volumes:
      - data:/usr/share/elasticsearch/data
      #- ./elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
