@@ -4,11 +4,7 @@ services:
   elasticsearch:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.0
     environment:
-      - "cluster.name=es-cluster"
       - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
-      - "discovery.zen.minimum_master_nodes=2"
-      - "network.publish_host=_eth0_"
-      - "discovery.zen.ping.unicast.hosts=tasks.elasticsearch"
     networks:
        - esnet
     ports:
@@ -16,6 +12,7 @@ services:
       - 9300:9300
     volumes:
       - esdata:/usr/share/elasticsearch/data
+      - /data/Elasticsearch/elasticsearch.yml:/usr/share/elasticsearch/config/elasticsearch.yml
     deploy:
       mode: global
       placement:
