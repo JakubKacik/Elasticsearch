@@ -8,15 +8,16 @@ services:
         parallelism: 1
         delay: 10m
     environment:
-      - "network.host=_eth0_"
       - "network.publish_host=_eth0_"
       - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
       - "discovery.zen.ping.unicast.hosts=elasticsearch"
+      - "cluster.name=es-cluster"
       - "discovery.zen.minimum_master_nodes=3"
     networks:
       - elasticsearch
     ports:
       - 9200:9200
+      - 9300:9300
 networks:
   elasticsearch:
     driver: overlay
