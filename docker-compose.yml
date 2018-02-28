@@ -19,6 +19,8 @@ services:
       placement:
         constraints:
           - node.labels.type == elastic
+    volumes:
+     - data:/usr/share/elasticsearch/data
 
   kibana:
     image: docker.elastic.co/kibana/kibana:6.2.2
@@ -37,3 +39,6 @@ services:
 
 networks:
   esnet:
+
+volumes:
+  data:
