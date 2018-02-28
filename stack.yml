@@ -4,7 +4,6 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.0
     deploy:
       replicas: 5
-      endpoint_mode: dnsrr
       update_config:
         parallelism: 1
         delay: 10m
