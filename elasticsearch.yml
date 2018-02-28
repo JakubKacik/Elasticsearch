@@ -1,2 +1,0 @@
-discovery.zen.ping.unicast.hosts: 
-  - tasks.dev_elasticsearch
