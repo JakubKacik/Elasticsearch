@@ -6,13 +6,13 @@ services:
       replicas: 5
       update_config:
         parallelism: 1
-        delay: 10m
+        delay: 5s
     environment:
-      - "network.publish_host=_eth0_"
-      - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
-      - "discovery.zen.ping.unicast.hosts=elasticsearch"
       - "cluster.name=es-cluster"
+      - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
       - "discovery.zen.minimum_master_nodes=3"
+      - "network.publish_host=_eth0_"
+      - "discovery.zen.ping.unicast.hosts=tasks.elasticsearch"
     networks:
       - elasticsearch
     ports:
