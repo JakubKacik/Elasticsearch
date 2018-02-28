@@ -1,0 +1,4 @@
+cluster.name: es-cluster
+discovery.zen.minimum_master_nodes: 2
+etwork.publish_host: _eth0_
+discovery.zen.ping.unicast.hosts: tasks.elasticsearch
