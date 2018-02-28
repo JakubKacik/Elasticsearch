@@ -5,6 +5,10 @@ services:
     image: docker.elastic.co/elasticsearch/elasticsearch:6.2.0
     environment:
       - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
+      - "discovery.zen.minimum_master_nodes=2"
+      - "etwork.publish_host=_eth0_"
+      - "discovery.zen.ping.unicast.hosts: tasks.elasticsearch"
+      - "cluster.name=es-cluster"
     networks:
        - esnet
     ports:
