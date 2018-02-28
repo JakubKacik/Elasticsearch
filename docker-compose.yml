@@ -1,0 +1,39 @@
+version: "3.4"
+
+services:
+  elasticsearch:
+    image: docker.elastic.co/elasticsearch/elasticsearch:6.2.0
+    environment:
+      - "cluster.name=es-cluster"
+      - "ES_JAVA_OPTS=-Xms2048m -Xmx2048m"
+      - "discovery.zen.minimum_master_nodes=2"
+      - "network.publish_host=_eth0_"
+      - "discovery.zen.ping.unicast.hosts=tasks.elasticsearch"
+    networks:
+       - esnet
+    ports:
+      - 9200:9200
+      - 9300:9300
+    deploy:
+      mode: global
+      placement:
+        constraints:
+          - node.labels.type == elastic
+
+  kibana:
+    image: docker.elastic.co/kibana/kibana:6.2.2
+    ports:
+      - 5601:5601
+    networks:
+      - esnet
+    depends_on:
+      - elasticsearch
+    deploy:
+      mode: replicated
+      replicas: 1
+      placement:
+        constraints:
+          - node.role == manager
+
+networks:
+  esnet:
